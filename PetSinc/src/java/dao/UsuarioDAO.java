@@ -96,7 +96,6 @@ public class UsuarioDAO {
             Connection conexao = Conexao.abreConexao();
 
             String queryBuscar = "SELECT * FROM usuario";
-
             PreparedStatement pst = conexao.prepareStatement(queryBuscar);
 
             ResultSet rst = pst.executeQuery();
