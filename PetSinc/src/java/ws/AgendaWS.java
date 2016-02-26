@@ -69,12 +69,13 @@ public class AgendaWS {
                    
         Agenda agenda = new Agenda();
         agenda.setIdCliente(idCliente);      
-        
+                    
         AgendaDAO dao = new AgendaDAO();
         agenda = dao.buscarAgendaPorLogin(agenda);
         //convertendo para Gson
         Gson g = new Gson();
-        return g.toJson(agenda);
+        return g.toJson(agenda);           
+
 
     }
 

@@ -29,10 +29,9 @@ public class AgendaDAO {
             Connection conexao = Conexao.abreConexao();
 
             String queryBuscar = "SELECT * FROM tb_petsoftware_agenda_atendimento";
-            PreparedStatement pst = conexao.prepareStatement(queryBuscar);            
-            
+            PreparedStatement pst = conexao.prepareStatement(queryBuscar);
+
             ResultSet rst = pst.executeQuery();
-            
 
             while (rst.next()) {
 
@@ -61,31 +60,35 @@ public class AgendaDAO {
         return lista;
     }
 
-    public Agenda buscarAgendaPorLogin(Agenda agenda) {                      
-               
+    public Agenda buscarAgendaPorLogin(Agenda agenda) {
+
         try {
             Connection conexao = Conexao.abreConexao();
 
             String queryBuscar = "SELECT * FROM tb_petsoftware_agenda_atendimento WHERE pk_cliente = ?";
-
             PreparedStatement pst = conexao.prepareStatement(queryBuscar);
             pst.setInt(1, agenda.getIdCliente());
             ResultSet rst = pst.executeQuery();
 
-            while (rst.next()) {
+            if (rst.next()) {
 
-             agenda = new Agenda();
+                agenda = new Agenda();
 
-                agenda.setId(rst.getInt(1));
-                agenda.setDataFim(rst.getDate(2));
+                //agenda.setId(rst.getInt(1));
+                //agenda.setDataFim(rst.getDate(2));
                 agenda.setDataInicio(rst.getDate(3));
                 agenda.setDescricao(rst.getString(4));
-                agenda.setDiaTodo(rst.getBoolean(5));
-                agenda.setExecutante(rst.getString(6));
-                agenda.setPrioridadeAgenda(rst.getString(7));
-                agenda.setIdCliente(rst.getInt(8));             
+                //agenda.setDiaTodo(rst.getBoolean(5));
+                //agenda.setExecutante(rst.getString(6));
+                agenda.setAnimal(rst.getString(7));
+                //agenda.setPrioridadeAgenda(rst.getString(8));
+                agenda.setStatus(rst.getString(9));
+                //agenda.setIdCliente(rst.getInt(10));
 
-            } 
+            } else {
+
+                return agenda; // retorna nulo
+            }
 
             conexao.close();
         } catch (SQLException e) {
@@ -98,12 +101,12 @@ public class AgendaDAO {
 /*
 
  String queryBuscar = "SELECT \n"
-                    + "agenda.ID_AGENDA, agenda.DT_INICIO_AGENDAMENTO, agenda.DT_FIM_AGENDAMENTO, agenda.DE_EXECUTANTE,\n"
-                    + "cliente.ID_CLIENTE, cliente.DE_NOME \n"
-                    + "FROM \n"
-                    + "tb_petsoftware_agenda_atendimento AS agenda\n"
-                    + "INNER JOIN \n"
-                    + "tb_petsoftware_cliente AS cliente \n"
-                    + "ON \n"
-                    + "cliente.ID_CLIENTE = agenda.pk_cliente WHERE pk_cliente = ?";
-*/
+ + "agenda.ID_AGENDA, agenda.DT_INICIO_AGENDAMENTO, agenda.DT_FIM_AGENDAMENTO, agenda.DE_DESCRICAO, agenda.DE_ANIMAL\n"
+ + "cliente.ID_CLIENTE, cliente.DE_NOME \n"
+ + "FROM \n"
+ + "tb_petsoftware_agenda_atendimento AS agenda\n"
+ + "INNER JOIN \n"
+ + "tb_petsoftware_cliente AS cliente \n"
+ + "ON \n"
+ + "cliente.ID_CLIENTE = agenda.pk_cliente WHERE pk_cliente = ?";
+ */

@@ -131,9 +131,7 @@ public class UsuarioDAO {
             String queryBuscar = "SELECT * FROM usuario WHERE login = ?";
 
             PreparedStatement pst = conexao.prepareStatement(queryBuscar);
-
             pst.setString(1, usuario.getLogin());
-
             ResultSet rst = pst.executeQuery();
 
             if (rst.next()) {

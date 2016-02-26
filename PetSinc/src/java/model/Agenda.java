@@ -16,10 +16,12 @@ public class Agenda {
     private Integer id;    
     private String descricao;  
     private String executante;
+    private String animal;
     private Date dataInicio;
     private Date dataFim;
     private Integer idCliente;          
     private String prioridadeAgenda;
+    private String status;
     private boolean diaTodo;
 
     @Override
@@ -91,5 +93,24 @@ public class Agenda {
         this.diaTodo = diaTodo;
     }
 
+    public void setExecutante(Integer idCliente) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public String getAnimal() {
+        return animal;
+    }
+
+    public void setAnimal(String animal) {
+        this.animal = animal;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
     
 }
